@@ -1,3 +1,4 @@
+import React from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import ImagePopup from "./ImagePopup";
@@ -5,18 +6,58 @@ import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 
 function App() {
+
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  function handleEditAvatarClick() {
+    // setIsEditAvatarPopupOpen(true);
+    const popupAvatar = document.querySelector(".popup_avatar");
+    const popupAvatarOpenButton = document.querySelector(
+      ".profile__avatar-button"
+    );
+
+    popupAvatarOpenButton.addEventListener("click", () => {
+      popupAvatar.classList.add("popup_opened");
+    });
+  }
+
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  function handleEditProfileClick() {
+    // setIsEditProfilePopupOpen(true);
+    const popupProfile = document.querySelector(".popup_profile");
+    const popupProfileOpenButton = document.querySelector(".profile__edit");
+
+    popupProfileOpenButton.addEventListener("click", () => {
+      popupProfile.classList.add("popup_opened");
+    });
+  }
+
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true);
+    // const popupAddPlace = document.querySelector(".popup_add");
+    // const popupAddPlaceButton = document.querySelector(".profile__add-button");
+
+    // popupAddPlaceButton.addEventListener("click", () => {
+    //   popupAddPlace.classList.add("popup_opened");
+    // });
+  }
+
   return (
     <div>
       <Header />
-      <Main />
+      <Main
+        onEditProfile={handleEditProfileClick}
+        onAddPlace={handleAddPlaceClick}
+        onEditAvatar={handleEditAvatarClick}
+      />
       <Footer />
-
       {"{"}/* Попап редактирования Кусто */{"}"}
       <PopupWithForm
         name="profile"
         title="Редактировать профиль"
         formName="edit"
         btnText="Сохранить"
+        isOpen='false'
       >
         <input
           type="text"
@@ -45,13 +86,13 @@ function App() {
           ssssssssss
         </span>
       </PopupWithForm>
-
       {"{"}/* Попап добавления карточек */{"}"}
       <PopupWithForm
         name="add"
         title="Новое место"
         formName="add"
         btnText="Создать"
+        isOpen='false'
       >
         <input
           type="text"
@@ -78,44 +119,22 @@ function App() {
           fffffffff
         </span>
       </PopupWithForm>
-
       <ImagePopup />
-
       {"{"}/* Подтвердить удаление */{"}"}
       <PopupWithForm
         name="confirm"
         title="Вы уверены?"
-        formName='null'
+        formName="null"
         btnText="Да"
-      >
-
-      </PopupWithForm>
-
-{/*       <section className="popup popup_confirm">
-        <div className="popup__container">
-          <h2 className="popup__title popup__title_confirm">Вы уверены?</h2>
-          <button
-            className="popup__button-save popup__button-save_confirm"
-            type="submit"
-            aria-label="Создать"
-          >
-            Да
-          </button>
-          <button type="button" className="popup__button-close">
-            <img
-              src="<%=require('./images/Close_Icon.svg')%>"
-              alt="Закрыть окно"
-              className="popup__close-img"
-            />
-          </button>
-        </div>
-      </section> */}
+        isOpen='false'
+      ></PopupWithForm>
       {"{"}/* Обновить аватар */{"}"}
       <PopupWithForm
         name="avatar"
         title="Обновить аватар"
         formName="avatar"
         btnText="Сохранить"
+        isOpen='false'
       >
         <input
           type="url"

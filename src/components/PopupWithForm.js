@@ -1,9 +1,9 @@
 import Close_Icon from "../images/Close_Icon.svg";
 
-function PopupWithForm({ title, name, formName, btnText, popupConfirm, children }) {
-/*     function confirmPopupHandler() {
+function PopupWithForm({ title, name, formName, btnText, isOpen, children }) {
+    function confirmPopupHandler() {
         let buttonClass = '';
-        if (name === 'profile') {
+        if (name === 'confirm') {
             buttonClass = 'popup__button-save popup__button-save_confirm';
         } else {
             buttonClass = 'popup__button-save';
@@ -11,9 +11,9 @@ function PopupWithForm({ title, name, formName, btnText, popupConfirm, children 
         console.log(buttonClass)
         console.log(name)
         return buttonClass;
-    } */
+    }
   return (
-    <div className={`popup popup_${name}`}>
+    <div className={`popup popup_${name} + {isOpen ? ' popup_opened' : ''}`}>
       <div className="popup__container">
         <h2 className="popup__title">{title}</h2>
         <form
@@ -25,7 +25,7 @@ function PopupWithForm({ title, name, formName, btnText, popupConfirm, children 
           {children}
 
           <button
-            className='popup__button-save'
+            className={confirmPopupHandler()}
             type="submit"
             aria-label={btnText}
           >
