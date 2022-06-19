@@ -8,16 +8,26 @@ function Main() {
         const popupAvatarOpenButton = document.querySelector('.profile__avatar-button');
 
         popupAvatarOpenButton.addEventListener('click', () => {
-            popupAvatar.classList.add('popup_opened')
+            popupAvatar.classList.add('popup_opened');
         });
     }
 
     function handleEditProfileClick() {
         const popupProfile = document.querySelector('.popup_profile');
+        const popupProfileOpenButton = document.querySelector('.profile__edit');
+
+        popupProfileOpenButton.addEventListener('click', () => {
+            popupProfile.classList.add('popup_opened');
+        });
     }
 
     function handleAddPlaceClick() {
         const popupAddPlace = document.querySelector('.popup_add');
+        const popupAddPlaceButton = document.querySelector('.profile__add-button');
+
+        popupAddPlaceButton.addEventListener('click', () => {
+            popupAddPlace.classList.add('popup_opened')
+        });
     }
 
   return (
@@ -39,6 +49,7 @@ function Main() {
               className="profile__edit"
               type="button"
               aria-label="Редактировать профиль"
+              onClick={handleEditProfileClick}
             >
               <img
                 src={edit}
@@ -53,6 +64,8 @@ function Main() {
           className="profile__add-button"
           type="button"
           aria-label="Добавить"
+          onClick={handleAddPlaceClick}
+
         >
           <img
             src={plus}

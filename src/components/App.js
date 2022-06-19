@@ -1,6 +1,8 @@
-import Footer from './Footer';
-import Header from './Header';
-import Main from './Main';
+import Footer from "./Footer";
+import Header from "./Header";
+import ImagePopup from "./ImagePopup";
+import Main from "./Main";
+import PopupWithForm from "./PopupWithForm";
 
 function App() {
   return (
@@ -8,129 +10,88 @@ function App() {
       <Header />
       <Main />
       <Footer />
+
       {"{"}/* Попап редактирования Кусто */{"}"}
-      <section className="popup popup_profile">
-        <div className="popup__container">
-          <h2 className="popup__title">Редактировать профиль</h2>
-          <form className="popup__form popup__form_edit" noValidate name="edit">
-            <input
-              type="text"
-              className="popup__input popup__input_type_name"
-              defaultvalue="Жак-Ив Кусто"
-              id="name-input"
-              required
-              minLength="{2}"
-              maxLength="{40}"
-              name="name"
-            />
-            <span
-              className="popup__error name-input-error"
-              id="name-input-error"
-            >
-              aaaaaaa
-            </span>
-            <input
-              type="text"
-              className="popup__input popup__input_type_about"
-              defaultvalue="Исследователь океана"
-              id="job-input"
-              required
-              minLength="{2}"
-              maxLength="{200}"
-              name="about"
-            />
-            <span className="popup__error job-input-error" id="job-input-error">
-              ssssssssss
-            </span>
-            <button
-              className="popup__button-save"
-              type="submit"
-              aria-label="Сохранить"
-            >
-              Сохранить
-            </button>
-          </form>
-          <button type="button" className="popup__button-close">
-            <img
-              src="<%=require('./images/Close_Icon.svg')%>"
-              alt="Закрыть окно"
-              className="popup__close-img"
-            />
-          </button>
-        </div>
-      </section>
+      <PopupWithForm
+        name="profile"
+        title="Редактировать профиль"
+        formName="edit"
+        btnText="Сохранить"
+      >
+        <input
+          type="text"
+          className="popup__input popup__input_type_name"
+          defaultvalue="Жак-Ив Кусто"
+          id="name-input"
+          required
+          minLength="{2}"
+          maxLength="{40}"
+          name="name"
+        />
+        <span className="popup__error name-input-error" id="name-input-error">
+          aaaaaaa
+        </span>
+        <input
+          type="text"
+          className="popup__input popup__input_type_about"
+          defaultvalue="Исследователь океана"
+          id="job-input"
+          required
+          minLength="{2}"
+          maxLength="{200}"
+          name="about"
+        />
+        <span className="popup__error job-input-error" id="job-input-error">
+          ssssssssss
+        </span>
+      </PopupWithForm>
+
       {"{"}/* Попап добавления карточек */{"}"}
-      <section className="popup popup_add">
-        <div className="popup__container">
-          <h2 className="popup__title">Новое место</h2>
-          <form className="popup__form popup__form_add" noValidate name="add">
-            <input
-              type="text"
-              className="popup__input popup__input_type_name"
-              placeholder="Название"
-              required
-              minLength="{2}"
-              maxLength="{30}"
-              id="place-input"
-              name="name"
-            />
-            <span
-              className="popup__error place-input-error"
-              id="place-input-error"
-            >
-              dddddddddd
-            </span>
-            <input
-              type="url"
-              className="popup__input popup__input_type_about"
-              placeholder="Ссылка на картинку"
-              required
-              id="link-input"
-              name="link"
-            />
-            <span
-              className="popup__error link-input-error"
-              id="link-input-error"
-            >
-              fffffffff
-            </span>
-            <button
-              className="popup__button-save"
-              type="submit"
-              aria-label="Создать"
-            >
-              Создать
-            </button>
-          </form>
-          <button type="button" className="popup__button-close">
-            <img
-              src="<%=require('./images/Close_Icon.svg')%>"
-              alt="Закрыть окно"
-              className="popup__close-img"
-            />
-          </button>
-        </div>
-      </section>
-      {"{"}/* Большая картинка */{"}"}
-      <section className="popup popup_big-picture">
-        <div className="popup__container popup__container_size_xl">
-          <img
-            className="popup__picture-xl"
-            alt="Эльбрус"
-            src="<%=require('./images/elbrus.jpg')%>"
-          />
-          <p className="popup__pic-caption">11111111</p>
-          <button type="button" className="popup__button-close">
-            <img
-              src="<%=require('./images/Close_Icon.svg')%>"
-              alt="Закрыть окно"
-              className="popup__close-img"
-            />
-          </button>
-        </div>
-      </section>
+      <PopupWithForm
+        name="add"
+        title="Новое место"
+        formName="add"
+        btnText="Создать"
+      >
+        <input
+          type="text"
+          className="popup__input popup__input_type_name"
+          placeholder="Название"
+          required
+          minLength="{2}"
+          maxLength="{30}"
+          id="place-input"
+          name="name"
+        />
+        <span className="popup__error place-input-error" id="place-input-error">
+          dddddddddd
+        </span>
+        <input
+          type="url"
+          className="popup__input popup__input_type_about"
+          placeholder="Ссылка на картинку"
+          required
+          id="link-input"
+          name="link"
+        />
+        <span className="popup__error link-input-error" id="link-input-error">
+          fffffffff
+        </span>
+      </PopupWithForm>
+
+      <ImagePopup />
+
       {"{"}/* Подтвердить удаление */{"}"}
-      <section className="popup popup_confirm">
+      <PopupWithForm
+        name="confirm"
+        title="Вы уверены?"
+        formName='null'
+        btnText="Да"
+      >
+
+      </PopupWithForm>
+
+{/*       <section className="popup popup_confirm">
         <div className="popup__container">
           <h2 className="popup__title popup__title_confirm">Вы уверены?</h2>
           <button
@@ -148,47 +109,29 @@ function App() {
             />
           </button>
         </div>
-      </section>
+      </section> */}
       {"{"}/* Обновить аватар */{"}"}
-      <section className="popup popup_avatar">
-        <div className="popup__container">
-          <h2 className="popup__title">Обновить аватар</h2>
-          <form
-            className="popup__form popup__form_avatar"
-            noValidate
-            name="avatar"
-          >
-            <input
-              type="url"
-              className="popup__input popup__input_avatar"
-              placeholder="Ссылка на картинку"
-              required
-              id="avatar-input"
-              name="avatar"
-            />
-            <span
-              className="popup__error avatar-input-error"
-              id="avatar-input-error"
-            >
-              dddddddddd
-            </span>
-            <button
-              className="popup__button-save"
-              type="submit"
-              aria-label="Создать"
-            >
-              Сохранить
-            </button>
-          </form>
-          <button type="button" className="popup__button-close">
-            <img
-              src="<%=require('./images/Close_Icon.svg')%>"
-              alt="Закрыть окно"
-              className="popup__close-img"
-            />
-          </button>
-        </div>
-      </section>
+      <PopupWithForm
+        name="avatar"
+        title="Обновить аватар"
+        formName="avatar"
+        btnText="Сохранить"
+      >
+        <input
+          type="url"
+          className="popup__input popup__input_avatar"
+          placeholder="Ссылка на картинку"
+          required
+          id="avatar-input"
+          name="avatar"
+        />
+        <span
+          className="popup__error avatar-input-error"
+          id="avatar-input-error"
+        >
+          dddddddddd
+        </span>
+      </PopupWithForm>
       {/* Темплейт - заготовка карточки */}
       <template id="card-template">
         <div className="card">
