@@ -9,37 +9,24 @@ function App() {
 
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   function handleEditAvatarClick() {
-    // setIsEditAvatarPopupOpen(true);
-    const popupAvatar = document.querySelector(".popup_avatar");
-    const popupAvatarOpenButton = document.querySelector(
-      ".profile__avatar-button"
-    );
-
-    popupAvatarOpenButton.addEventListener("click", () => {
-      popupAvatar.classList.add("popup_opened");
-    });
+    setIsEditAvatarPopupOpen(true);
   }
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   function handleEditProfileClick() {
-    // setIsEditProfilePopupOpen(true);
-    const popupProfile = document.querySelector(".popup_profile");
-    const popupProfileOpenButton = document.querySelector(".profile__edit");
-
-    popupProfileOpenButton.addEventListener("click", () => {
-      popupProfile.classList.add("popup_opened");
-    });
+    setIsEditProfilePopupOpen(true);
   }
 
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   function handleAddPlaceClick() {
-    setIsAddPlacePopupOpen(true);
-    // const popupAddPlace = document.querySelector(".popup_add");
-    // const popupAddPlaceButton = document.querySelector(".profile__add-button");
+    setIsEditProfilePopupOpen(true);
+  }
 
-    // popupAddPlaceButton.addEventListener("click", () => {
-    //   popupAddPlace.classList.add("popup_opened");
-    // });
+
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsEditProfilePopupOpen(false);
   }
 
   return (
@@ -57,7 +44,8 @@ function App() {
         title="Редактировать профиль"
         formName="edit"
         btnText="Сохранить"
-        isOpen='false'
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
       >
         <input
           type="text"
@@ -92,7 +80,8 @@ function App() {
         title="Новое место"
         formName="add"
         btnText="Создать"
-        isOpen='false'
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
       >
         <input
           type="text"
@@ -126,7 +115,7 @@ function App() {
         title="Вы уверены?"
         formName="null"
         btnText="Да"
-        isOpen='false'
+        isOpen={false}
       ></PopupWithForm>
       {"{"}/* Обновить аватар */{"}"}
       <PopupWithForm
@@ -134,7 +123,8 @@ function App() {
         title="Обновить аватар"
         formName="avatar"
         btnText="Сохранить"
-        isOpen='false'
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
       >
         <input
           type="url"

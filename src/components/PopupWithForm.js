@@ -1,6 +1,6 @@
 import Close_Icon from "../images/Close_Icon.svg";
 
-function PopupWithForm({ title, name, formName, btnText, isOpen, children }) {
+function PopupWithForm({ title, name, formName, btnText, isOpen, onClose, children }) {
     function confirmPopupHandler() {
         let buttonClass = '';
         if (name === 'confirm') {
@@ -8,12 +8,10 @@ function PopupWithForm({ title, name, formName, btnText, isOpen, children }) {
         } else {
             buttonClass = 'popup__button-save';
         }
-        console.log(buttonClass)
-        console.log(name)
         return buttonClass;
     }
   return (
-    <div className={`popup popup_${name} + {isOpen ? ' popup_opened' : ''}`}>
+    <div className={`popup popup_${name}` + (isOpen ? ' popup_opened' : '')}>
       <div className="popup__container">
         <h2 className="popup__title">{title}</h2>
         <form
@@ -32,7 +30,7 @@ function PopupWithForm({ title, name, formName, btnText, isOpen, children }) {
             {btnText}
           </button>
         </form>
-        <button type="button" className='popup__button-close'>
+        <button type="button" className='popup__button-close' onClick={onClose}>
           <img
             src={Close_Icon}
             alt="Закрыть окно"
