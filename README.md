@@ -8,4 +8,4 @@ Mesto Russia
 
 Планы по доработке: полностью переделать проект под React
 
-https://artem-from-spb.github.io/mesto/
+https://artem-from-spb.github.io/mesto-react/
