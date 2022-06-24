@@ -1,17 +1,25 @@
 import Close_Icon from "../images/Close_Icon.svg";
 
-function PopupWithForm({ title, name, formName, btnText, isOpen, onClose, children }) {
-    function confirmPopupHandler() {
-        let buttonClass = '';
-        if (name === 'confirm') {
-            buttonClass = 'popup__button-save popup__button-save_confirm';
-        } else {
-            buttonClass = 'popup__button-save';
-        }
-        return buttonClass;
+function PopupWithForm({
+  title,
+  name,
+  formName,
+  btnText,
+  isOpen,
+  onClose,
+  children,
+}) {
+  function confirmPopupHandler() {
+    let buttonClass = "";
+    if (name === "confirm") {
+      buttonClass = "popup__button-save popup__button-save_confirm";
+    } else {
+      buttonClass = "popup__button-save";
     }
+    return buttonClass;
+  }
   return (
-    <div className={`popup popup_${name}` + (isOpen ? ' popup_opened' : '')}>
+    <div className={`popup popup_${name}` + (isOpen ? " popup_opened" : "")}>
       <div className="popup__container">
         <h2 className="popup__title">{title}</h2>
         <form
@@ -19,7 +27,6 @@ function PopupWithForm({ title, name, formName, btnText, isOpen, onClose, childr
           noValidate
           name={formName}
         >
-
           {children}
 
           <button
@@ -30,7 +37,7 @@ function PopupWithForm({ title, name, formName, btnText, isOpen, onClose, childr
             {btnText}
           </button>
         </form>
-        <button type="button" className='popup__button-close' onClick={onClose}>
+        <button type="button" className="popup__button-close" onClick={onClose}>
           <img
             src={Close_Icon}
             alt="Закрыть окно"

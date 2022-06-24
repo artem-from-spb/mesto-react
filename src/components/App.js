@@ -6,27 +6,37 @@ import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 
 function App() {
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    React.useState(false);
 
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
 
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    React.useState(false);
+
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
 
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+
   function handleAddPlaceClick() {
     setIsEditProfilePopupOpen(true);
   }
 
-
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
-    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setSelectedCard(false);
+  }
+
+  const [selectedCard, setSelectedCard] = React.useState(false);
+
+  function handleCardClick(card) {
+    setSelectedCard(card);
   }
 
   return (
@@ -36,6 +46,7 @@ function App() {
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
+        onCardClick={handleCardClick}
       />
       <Footer />
       {"{"}/* Попап редактирования Кусто */{"}"}
@@ -108,7 +119,7 @@ function App() {
           fffffffff
         </span>
       </PopupWithForm>
-      <ImagePopup />
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       {"{"}/* Подтвердить удаление */{"}"}
       <PopupWithForm
         name="confirm"

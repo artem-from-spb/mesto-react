@@ -2,14 +2,12 @@ import edit from "../images/edit.svg";
 import plus from "../images/plus.svg";
 import { api } from "../utils/Api";
 import React from "react";
-import bin from '../images/recycle-bin.svg'
+import Card from "./Card";
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
   const [userName, setUserName] = React.useState("");
   const [userDescription, setUserDescription] = React.useState("");
   const [userAvatar, setUserAvatar] = React.useState("");
-
-  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     api
@@ -20,13 +18,15 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
         setUserAvatar(res.avatar);
       })
       .catch((err) => alert(err));
-  });
+  }, []);
+
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     api
       .getInitialCards()
       .then((res) => {
-        setCards([res]);
+        setCards(res);
       })
       .catch((err) => alert(err));
   }, []);
@@ -71,30 +71,9 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
       </section>
       {"{"}/* Карточки */{"}"}
       <section className="elements">
-      {cards.map((card, i) => (
-                    <div className="card" key={i}>
-                    <img
-                      src={bin}
-                      alt="Корзина"
-                      className="card__recycle-bin"
-                      id="bin"
-                    />
-          
-                    <img
-                      src={card.src}
-                      className="card__image"
-                      alt={card.src}
-                    />
-                    <div className="card__info">
-                      <h2 className="card__title">Карачаевск</h2>
-                      <div className="card__like-section">
-                        <button type="button" className="card__button-like" />
-                        <p className="card__like-counter">1</p>
-                      </div>
-                    </div>
-                  </div>
-            ))}
-
+        {cards.map((card) => (
+          <Card key={card._id} card={card} onCardClick={onCardClick} />
+        ))}
       </section>
     </main>
   );
