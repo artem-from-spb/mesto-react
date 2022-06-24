@@ -4,6 +4,7 @@ import Header from "./Header";
 import ImagePopup from "./ImagePopup";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
+import bin from "../images/recycle-bin.svg";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
@@ -61,7 +62,7 @@ function App() {
         <input
           type="text"
           className="popup__input popup__input_type_name"
-          defaultvalue="Жак-Ив Кусто"
+          defaultValue="Жак-Ив Кусто"
           id="name-input"
           required
           minLength="{2}"
@@ -74,7 +75,7 @@ function App() {
         <input
           type="text"
           className="popup__input popup__input_type_about"
-          defaultvalue="Исследователь океана"
+          defaultValue="Исследователь океана"
           id="job-input"
           required
           minLength="{2}"
@@ -156,13 +157,13 @@ function App() {
       <template id="card-template">
         <div className="card">
           <img
-            src="<%=require('./images/recycle-bin.svg')%>"
+            src={bin}
             alt="Корзина"
             className="card__recycle-bin"
             id="bin"
           />
           <img
-            src="<%=require('./images/karachaevsk.jpg')%>"
+            src=""
             className="card__image"
             alt="Карачаевск"
           />
