@@ -18,6 +18,7 @@ function PopupWithForm({
     }
     return buttonClass;
   }
+  
   return (
     <div className={`popup popup_${name}` + (isOpen ? " popup_opened" : "")}>
       <div className="popup__container">

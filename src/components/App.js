@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import ImagePopup from "./ImagePopup";
@@ -7,21 +7,18 @@ import PopupWithForm from "./PopupWithForm";
 import bin from "../images/recycle-bin.svg";
 
 function App() {
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
-    React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(false);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
 
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
-    React.useState(false);
-
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
-
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
@@ -34,8 +31,6 @@ function App() {
     setSelectedCard(false);
   }
 
-  const [selectedCard, setSelectedCard] = React.useState(false);
-
   function handleCardClick(card) {
     setSelectedCard(card);
   }
@@ -43,14 +38,17 @@ function App() {
   return (
     <div>
       <Header />
+
       <Main
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
         onCardClick={handleCardClick}
       />
+
       <Footer />
-      {"{"}/* Попап редактирования Кусто */{"}"}
+
+      {/* Попап редактирования Кусто */}
       <PopupWithForm
         name="profile"
         title="Редактировать профиль"
@@ -69,9 +67,10 @@ function App() {
           maxLength="{40}"
           name="name"
         />
-        <span className="popup__error name-input-error" id="name-input-error">
-          aaaaaaa
-        </span>
+        <span
+          className="popup__error name-input-error"
+          id="name-input-error"
+        ></span>
         <input
           type="text"
           className="popup__input popup__input_type_about"
@@ -82,11 +81,13 @@ function App() {
           maxLength="{200}"
           name="about"
         />
-        <span className="popup__error job-input-error" id="job-input-error">
-          ssssssssss
-        </span>
+        <span
+          className="popup__error job-input-error"
+          id="job-input-error"
+        ></span>
       </PopupWithForm>
-      {"{"}/* Попап добавления карточек */{"}"}
+
+      {/* Попап добавления карточек */}
       <PopupWithForm
         name="add"
         title="Новое место"
@@ -105,9 +106,10 @@ function App() {
           id="place-input"
           name="name"
         />
-        <span className="popup__error place-input-error" id="place-input-error">
-          dddddddddd
-        </span>
+        <span
+          className="popup__error place-input-error"
+          id="place-input-error"
+        ></span>
         <input
           type="url"
           className="popup__input popup__input_type_about"
@@ -116,12 +118,15 @@ function App() {
           id="link-input"
           name="link"
         />
-        <span className="popup__error link-input-error" id="link-input-error">
-          fffffffff
-        </span>
+        <span
+          className="popup__error link-input-error"
+          id="link-input-error"
+        ></span>
       </PopupWithForm>
+
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-      {"{"}/* Подтвердить удаление */{"}"}
+
+      {/* Подтвердить удаление */}
       <PopupWithForm
         name="confirm"
         title="Вы уверены?"
@@ -129,7 +134,8 @@ function App() {
         btnText="Да"
         isOpen={false}
       ></PopupWithForm>
-      {"{"}/* Обновить аватар */{"}"}
+
+      {/* Обновить аватар */}
       <PopupWithForm
         name="avatar"
         title="Обновить аватар"
@@ -153,20 +159,12 @@ function App() {
           dddddddddd
         </span>
       </PopupWithForm>
+
       {/* Темплейт - заготовка карточки */}
       <template id="card-template">
         <div className="card">
-          <img
-            src={bin}
-            alt="Корзина"
-            className="card__recycle-bin"
-            id="bin"
-          />
-          <img
-            src=""
-            className="card__image"
-            alt="Карачаевск"
-          />
+          <img src={bin} alt="Корзина" className="card__recycle-bin" id="bin" />
+          <img src="" className="card__image" alt="Карачаевск" />
           <div className="card__info">
             <h2 className="card__title">Карачаевск</h2>
             <div className="card__like-section">

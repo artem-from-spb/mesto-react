@@ -1,15 +1,16 @@
 import edit from "../images/edit.svg";
 import plus from "../images/plus.svg";
 import { api } from "../utils/Api";
-import React from "react";
+import { useState, useEffect } from "react";
 import Card from "./Card";
 
 function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-  const [userName, setUserName] = React.useState("");
-  const [userDescription, setUserDescription] = React.useState("");
-  const [userAvatar, setUserAvatar] = React.useState("");
+  const [userName, setUserName] = useState("");
+  const [userDescription, setUserDescription] = useState("");
+  const [userAvatar, setUserAvatar] = useState("");
+  const [cards, setCards] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     api
       .getUserInfo()
       .then((res) => {
@@ -18,11 +19,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
         setUserAvatar(res.avatar);
       })
       .catch((err) => alert(err));
-  }, []);
 
-  const [cards, setCards] = React.useState([]);
-
-  React.useEffect(() => {
     api
       .getInitialCards()
       .then((res) => {
@@ -33,7 +30,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
 
   return (
     <main>
-      {"{"}/* Кусто */{"}"}
+      {/* Кусто */}
       <section className="profile">
         <div className="profile__avatar-overlay">
           <img className="profile__avatar" src={userAvatar} alt={userName} />
@@ -69,7 +66,8 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
           <img src={plus} alt="Добавить" className="profile__plus" />
         </button>
       </section>
-      {"{"}/* Карточки */{"}"}
+
+      {/* Карточки */}
       <section className="elements">
         {cards.map((card) => (
           <Card key={card._id} card={card} onCardClick={onCardClick} />
