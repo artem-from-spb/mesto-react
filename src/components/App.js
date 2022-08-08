@@ -5,12 +5,29 @@ import ImagePopup from "./ImagePopup";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 import bin from "../images/recycle-bin.svg";
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(false);
+
+
+
+  const [currentUser, setCurrentUser] = useState();
+  useEffect(() => {
+    api
+      .getUserInfo()
+      .then((res) => {
+        setCurrentUser(res.name);
+      })
+      .catch((err) => alert(err));
+  }, []);
+
+
+
+
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -36,6 +53,7 @@ function App() {
   }
 
   return (
+    <CurrentUserContext.Provider value={currentUser}>
     <div>
       <Header />
 
@@ -175,6 +193,7 @@ function App() {
         </div>
       </template>
     </div>
+    </CurrentUserContext.Provider>
   );
 }
 
