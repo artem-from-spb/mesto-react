@@ -14,14 +14,22 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(false);
 
-  const [cards, setCards] = useState([]);
-
   const [currentUser, setCurrentUser] = useState({});
   useEffect(() => {
     api
       .getUserInfo()
       .then((res) => {
         setCurrentUser(res);
+      })
+      .catch((err) => alert(err));
+  }, []);
+
+  const [cards, setCards] = useState([]);
+  useEffect(() => {
+    api
+      .getInitialCards()
+      .then((res) => {
+        setCards(res);
       })
       .catch((err) => alert(err));
   }, []);

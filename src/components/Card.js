@@ -9,15 +9,17 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const isOwn = card.owner._id === currentUser._id;
 
   // Создаём переменную, которую после зададим в `className` для кнопки удаления
-  const cardDeleteButtonClassName = `card__delete-button ${
-    isOwn ? "card__delete-button_visible" : "card__delete-button_hidden"
+  const cardDeleteButtonClassName = `card__recycle-bin ${
+    isOwn ? "" : "card__recycle-bin_hidden"
   }`;
 
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
   const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
   // Создаём переменную, которую после зададим в `className` для кнопки лайка
-  const cardLikeButtonClassName = `...`;
+  const cardLikeButtonClassName = `card__button-like ${
+    isLiked ? "card__button-like_active" : ""
+  }`;
 
   function handleClick() {
     onCardClick(card);
@@ -33,7 +35,13 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
 
   return (
     <div className="card">
-      <img src={bin} alt="Корзина" className="card__recycle-bin" id="bin" onClick={handleDeleteClick} />
+      <img
+        src={bin}
+        alt="Корзина"
+        className={cardDeleteButtonClassName}
+        id="bin"
+        onClick={handleDeleteClick}
+      />
 
       <img
         src={card.link}
@@ -44,7 +52,11 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
       <div className="card__info">
         <h2 className="card__title">{card.name}</h2>
         <div className="card__like-section">
-          <button type="button" className="card__button-like" onClick={handleLikeClick} />
+          <button
+            type="button"
+            className={cardLikeButtonClassName}
+            onClick={handleLikeClick}
+          />
           <p className="card__like-counter">{card.likes.length}</p>
         </div>
       </div>
