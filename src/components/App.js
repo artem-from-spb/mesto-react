@@ -64,7 +64,13 @@ function App() {
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
       setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
+    }).catch((err) => alert(err));
+  }
+
+  function handleCardDelete(id) {
+    api.removeCard(id).then(() => {
+      setCards(cards.filter((card) => card._id !== id))
+    }).catch((err) => alert(err));
   }
 
   return (
@@ -78,6 +84,7 @@ function App() {
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
           onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
           cards={cards}
         />
 

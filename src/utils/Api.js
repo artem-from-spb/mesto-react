@@ -62,19 +62,34 @@ class Api {
   }
 
   ///8. Постановка и снятие лайка
-  setLike(cardId) {
-    return fetch(`${this._url}cards/${cardId}/likes`, {
-      method: "PUT",
-      headers: this._headers,
-    }).then(this._checkResponse);
+  // setLike(cardId) {
+  //   return fetch(`${this._url}cards/${cardId}/likes`, {
+  //     method: "PUT",
+  //     headers: this._headers,
+  //   }).then(this._checkResponse);
+  // }
+
+  // removeLike(cardId) {
+  //   return fetch(`${this._url}cards/${cardId}/likes`, {
+  //     method: "DELETE",
+  //     headers: this._headers,
+  //   }).then(this._checkResponse);
+  // }
+
+  changeLikeCardStatus(cardId, isLiked) {
+    if (isLiked) {
+      return fetch(`${this._url}cards/${cardId}/likes`, {
+        method: "PUT",
+        headers: this._headers,
+      }).then(this._checkResponse);
+    } else {
+      return fetch(`${this._url}cards/${cardId}/likes`, {
+        method: "DELETE",
+        headers: this._headers,
+      }).then(this._checkResponse);
+    }
   }
 
-  removeLike(cardId) {
-    return fetch(`${this._url}cards/${cardId}/likes`, {
-      method: "DELETE",
-      headers: this._headers,
-    }).then(this._checkResponse);
-  }
 
   ///9. Обновление аватара пользователя
   avatarPictureNew(link) {
