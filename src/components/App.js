@@ -7,6 +7,7 @@ import PopupWithForm from "./PopupWithForm";
 import bin from "../images/recycle-bin.svg";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { api } from "../utils/Api";
+import EditProfilePopup from "./EditProfilePopup";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -62,17 +63,37 @@ function App() {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    }).catch((err) => alert(err));
+    api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => alert(err));
   }
 
   function handleCardDelete(id) {
-    api.removeCard(id).then(() => {
-      setCards(cards.filter((card) => card._id !== id))
-    }).catch((err) => alert(err));
+    api
+      .removeCard(id)
+      .then(() => {
+        setCards(cards.filter((card) => card._id !== id));
+      })
+      .catch((err) => alert(err));
   }
 
+  function handleUpdateUser(user) {
+    api
+      .editProfileData(user)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      // .then(closeAllPopups)
+      .catch((err) => alert(err));
+  }
+
+ 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div>
@@ -91,43 +112,11 @@ function App() {
         <Footer />
 
         {/* Попап редактирования Кусто */}
-        <PopupWithForm
-          name="profile"
-          title="Редактировать профиль"
-          formName="edit"
-          btnText="Сохранить"
+        <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
-        >
-          <input
-            type="text"
-            className="popup__input popup__input_type_name"
-            defaultValue="Жак-Ив Кусто"
-            id="name-input"
-            required
-            minLength="{2}"
-            maxLength="{40}"
-            name="name"
-          />
-          <span
-            className="popup__error name-input-error"
-            id="name-input-error"
-          ></span>
-          <input
-            type="text"
-            className="popup__input popup__input_type_about"
-            defaultValue="Исследователь океана"
-            id="job-input"
-            required
-            minLength="{2}"
-            maxLength="{200}"
-            name="about"
-          />
-          <span
-            className="popup__error job-input-error"
-            id="job-input-error"
-          ></span>
-        </PopupWithForm>
+          onUpdateUser={handleUpdateUser}
+        />
 
         {/* Попап добавления карточек */}
         <PopupWithForm

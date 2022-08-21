@@ -8,6 +8,7 @@ function PopupWithForm({
   isOpen,
   onClose,
   children,
+  onSubmit
 }) {
   function confirmPopupHandler() {
     let buttonClass = "";
@@ -27,6 +28,7 @@ function PopupWithForm({
           className="popup__form popup__form_edit"
           noValidate
           name={formName}
+          onSubmit={onSubmit}
         >
           {children}
 
