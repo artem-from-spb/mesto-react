@@ -3,8 +3,8 @@ import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function EditProfilePopup(props) {
-  const [name, setName] = React.useState('');
-  const [description, setDescription] = React.useState('');
+  const [name, setName] = React.useState("");
+  const [description, setDescription] = React.useState("");
 
   function handleNameChange(e) {
     setName(e.target.value);
@@ -22,14 +22,12 @@ function EditProfilePopup(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-  
+
     props.onUpdateUser({
-      name,
+      name: name,
       about: description,
     });
   }
-  console.log(name)
-  console.log(description)
 
   return (
     <PopupWithForm
@@ -50,7 +48,7 @@ function EditProfilePopup(props) {
         maxLength="{40}"
         name="name"
         onChange={handleNameChange}
-        value={name}
+        value={name || ""}
       />
       <span
         className="popup__error name-input-error"
@@ -65,7 +63,7 @@ function EditProfilePopup(props) {
         maxLength="{200}"
         name="about"
         onChange={handleDescriptionChange}
-        value={description}
+        value={description || ""}
       />
       <span
         className="popup__error job-input-error"

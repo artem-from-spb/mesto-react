@@ -90,7 +90,6 @@ class Api {
     }
   }
 
-
   ///9. Обновление аватара пользователя
   avatarPictureNew(link) {
     return fetch(`${this._url}users/me/avatar`, {
@@ -102,7 +101,6 @@ class Api {
     }).then(this._checkResponse);
   }
 }
-
 
 export const api = new Api({
   url: "https://mesto.nomoreparties.co/v1/cohort-41/",

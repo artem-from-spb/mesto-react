@@ -8,7 +8,7 @@ function PopupWithForm({
   isOpen,
   onClose,
   children,
-  onSubmit
+  onSubmit,
 }) {
   function confirmPopupHandler() {
     let buttonClass = "";
@@ -19,7 +19,7 @@ function PopupWithForm({
     }
     return buttonClass;
   }
-  
+
   return (
     <div className={`popup popup_${name}` + (isOpen ? " popup_opened" : "")}>
       <div className="popup__container">

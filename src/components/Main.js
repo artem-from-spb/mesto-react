@@ -1,15 +1,19 @@
 import edit from "../images/edit.svg";
 import plus from "../images/plus.svg";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, cards, onCardDelete }) {
-
-
+function Main({
+  onEditProfile,
+  onAddPlace,
+  onEditAvatar,
+  onCardClick,
+  onCardLike,
+  cards,
+  onCardDelete,
+}) {
   const currentUser = useContext(CurrentUserContext);
-
-
 
   return (
     <main>
@@ -57,7 +61,13 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike
       {/* Карточки */}
       <section className="elements">
         {cards.map((card) => (
-          <Card key={card._id} card={card} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete}  />
+          <Card
+            key={card._id}
+            card={card}
+            onCardClick={onCardClick}
+            onCardLike={onCardLike}
+            onCardDelete={onCardDelete}
+          />
         ))}
       </section>
     </main>

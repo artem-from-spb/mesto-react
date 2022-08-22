@@ -8,6 +8,8 @@ import bin from "../images/recycle-bin.svg";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { api } from "../utils/Api";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -89,11 +91,29 @@ function App() {
         setCurrentUser(res);
         closeAllPopups();
       })
-      // .then(closeAllPopups)
       .catch((err) => alert(err));
   }
 
- 
+  function handleUpdateAvatar(src) {
+    api
+      .avatarPictureNew(src.avatar)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((err) => alert(err));
+  }
+
+  function handleAddPlaceSubmit(card) {
+    api
+      .addNewCard(card)
+      .then((res) => {
+        setCards([res, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => alert(err));
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div>
@@ -119,41 +139,11 @@ function App() {
         />
 
         {/* Попап добавления карточек */}
-        <PopupWithForm
-          name="add"
-          title="Новое место"
-          formName="add"
-          btnText="Создать"
+        <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
-        >
-          <input
-            type="text"
-            className="popup__input popup__input_type_name"
-            placeholder="Название"
-            required
-            minLength="{2}"
-            maxLength="{30}"
-            id="place-input"
-            name="name"
-          />
-          <span
-            className="popup__error place-input-error"
-            id="place-input-error"
-          ></span>
-          <input
-            type="url"
-            className="popup__input popup__input_type_about"
-            placeholder="Ссылка на картинку"
-            required
-            id="link-input"
-            name="link"
-          />
-          <span
-            className="popup__error link-input-error"
-            id="link-input-error"
-          ></span>
-        </PopupWithForm>
+          onUpdateCards={handleAddPlaceSubmit}
+        />
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
@@ -167,29 +157,11 @@ function App() {
         ></PopupWithForm>
 
         {/* Обновить аватар */}
-        <PopupWithForm
-          name="avatar"
-          title="Обновить аватар"
-          formName="avatar"
-          btnText="Сохранить"
+        <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
-        >
-          <input
-            type="url"
-            className="popup__input popup__input_avatar"
-            placeholder="Ссылка на картинку"
-            required
-            id="avatar-input"
-            name="avatar"
-          />
-          <span
-            className="popup__error avatar-input-error"
-            id="avatar-input-error"
-          >
-            dddddddddd
-          </span>
-        </PopupWithForm>
+          onUpdateAvatar={handleUpdateAvatar}
+        />
 
         {/* Темплейт - заготовка карточки */}
         <template id="card-template">
