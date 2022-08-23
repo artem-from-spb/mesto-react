@@ -15,7 +15,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({});
 
   const [currentUser, setCurrentUser] = useState({});
   useEffect(() => {
@@ -162,26 +162,6 @@ function App() {
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
         />
-
-        {/* Темплейт - заготовка карточки */}
-        <template id="card-template">
-          <div className="card">
-            <img
-              src={bin}
-              alt="Корзина"
-              className="card__recycle-bin"
-              id="bin"
-            />
-            <img src="" className="card__image" alt="Карачаевск" />
-            <div className="card__info">
-              <h2 className="card__title">Карачаевск</h2>
-              <div className="card__like-section">
-                <button type="button" className="card__button-like" />
-                <p className="card__like-counter">1</p>
-              </div>
-            </div>
-          </div>
-        </template>
       </div>
     </CurrentUserContext.Provider>
   );

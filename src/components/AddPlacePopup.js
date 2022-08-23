@@ -41,7 +41,7 @@ function AddPlacePopup(props) {
         maxLength="{30}"
         id="place-input"
         name="name"
-        // value={name}
+        value={name}
         onChange={handleNameChange}
       />
       <span
@@ -55,7 +55,7 @@ function AddPlacePopup(props) {
         required
         id="link-input"
         name="link"
-        // value={link}
+        value={link}
         onChange={handleLinkChange}
       />
       <span

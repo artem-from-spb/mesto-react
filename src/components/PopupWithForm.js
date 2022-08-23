@@ -10,15 +10,9 @@ function PopupWithForm({
   children,
   onSubmit,
 }) {
-  function confirmPopupHandler() {
-    let buttonClass = "";
-    if (name === "confirm") {
-      buttonClass = "popup__button-save popup__button-save_confirm";
-    } else {
-      buttonClass = "popup__button-save";
-    }
-    return buttonClass;
-  }
+  const buttonClass = `popup__button-save ${
+    name === "confirm" ? "popup__button-save_confirm" : ""
+  }`;
 
   return (
     <div className={`popup popup_${name}` + (isOpen ? " popup_opened" : "")}>
@@ -32,11 +26,7 @@ function PopupWithForm({
         >
           {children}
 
-          <button
-            className={confirmPopupHandler()}
-            type="submit"
-            aria-label={btnText}
-          >
+          <button className={buttonClass} type="submit" aria-label={btnText}>
             {btnText}
           </button>
         </form>
